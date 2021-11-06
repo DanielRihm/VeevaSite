@@ -49,7 +49,7 @@ $(function () {
         // makes the plot
         var layout = {font: {size: 18}};
         var config = {responsive: true};
-        TESTER = document.getElementById('test');
+        TESTER = document.getElementById('TotalVSNew');
         Plotly.newPlot(TESTER, data, layout, config);
         });
 });
