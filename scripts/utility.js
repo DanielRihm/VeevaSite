@@ -3,7 +3,9 @@ function parseCSV(str) {
     const array2D = [];
     for(r = 1; r < str.length; r++)
     {
-        array2D[r-1] = str[r].split(",");
+        if (str[r] != "") {
+            array2D.push(str[r].split(","));
+        }
     }
 
     return array2D;
