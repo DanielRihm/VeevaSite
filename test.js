@@ -1,12 +1,11 @@
 function parseCSV(str)
 {
-    const array2D = [1000][17];
-    for(r = 0; r < 1001; r++)
+    const array2D = [];
+    for(r = 1; r < str.length; r++)
     {
         const rowArray = str[r].split(",");
-        for(c = 0; c < 17; c++)
-        {
-            array2D[c][r] = rowArray[c];
-        }
+        array2D[r-1] = rowArray;
     }
+
+    return array2D;
 }

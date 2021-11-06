@@ -1,11 +1,7 @@
 $(function () {
     $.get('/Prescriber_Data.csv', function (data) {
-        var input = data.split('\n');
-
+        var input = data.split('\r\n');
         var columnData = parseCSV(input);
-
-        console.table(columnData);
-        console.log(columnData[0].length);
 
         const newStart = 5;
         const newEnd = 10;
@@ -24,21 +20,20 @@ $(function () {
             yTotalData[i-totalStart] = sumOfColumn(columnData, i);
         }
 
-        console.table(yNewData);
-        console.table(yTotalData);
-
         var trace1 = {
             x: xData,
             y: yNewData,
             mode: 'lines+markers',
-            type: 'scatter'
+            type: 'scatter',
+            name: 'Total New Prescriptions'
         };
 
         var trace2 = {
             x: xData,
             y: yTotalData,
             mode: 'lines+markers',
-            type: 'scatter'
+            type: 'scatter',
+            name: 'Total Prescriptions'
         };
 
         var data = [trace1, trace2];
@@ -50,7 +45,7 @@ $(function () {
         });
 });
 
-function parseCSV(testArray) {
+/*function parseCSV(testArray) {
     var outArray = [
         [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
         [2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
@@ -72,12 +67,12 @@ function parseCSV(testArray) {
         [18,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
     ];
     return outArray;
-}
+}*/
 
 function sumOfColumn(input, index) {
     var sum = 0;
     for (let i = 0; i < input[index].length; i++) {
-        sum += input[index][i];
+        sum += parseInt(input[i][index]);
     }
 
     return sum;
