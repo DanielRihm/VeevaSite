@@ -9,3 +9,12 @@ function parseCSV(str)
 
     return array2D;
 }
+
+function sumOfColumn(input, index) {
+    var sum = 0;
+    for (let i = 0; i < input[index].length; i++) {
+        sum += parseInt(input[i][index]);
+    }
+
+    return sum;
+}
