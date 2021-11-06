@@ -37,8 +37,7 @@ function findMaxPresciption(doctor, productData) {
     }
 
     var productIndex = findProduct(productData, doctor[4]);
-    console.log(productIndex);
-    if (productData != -1) {
+    if (productIndex != -1) {
         if (totalPrescription > productData[productIndex].count) {
             productData[productIndex].count = totalPrescription;
             productData[productIndex].name = doctor[1] + " " + doctor[2];
@@ -58,8 +57,8 @@ function findProduct(array, product) {
     var productIndex = -1;
     var currentIndex = 0;
     while (currentIndex < array.length && productIndex == -1) {
-        if (array[i].product == product) {
-            productIndex = i;
+        if (array[currentIndex].product == product) {
+            productIndex = currentIndex;
         }
         currentIndex++;
     }
