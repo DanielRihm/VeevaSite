@@ -1,3 +1,4 @@
+// reads in an array of rows and seperates out the columns and the items in each column
 function parseCSV(str)
 {
     const array2D = [];
@@ -10,6 +11,7 @@ function parseCSV(str)
     return array2D;
 }
 
+// sums up all of the integer values in the columns specified by index
 function sumOfColumn(input, index) {
     var sum = 0;
     for (let i = 0; i < input[index].length; i++) {
