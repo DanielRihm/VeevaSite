@@ -21,7 +21,7 @@
   "include": [
     "./src/**/*.js",
     "./types"
-  ],
+, "src/index.mjs"  ],
   "exclude": [
     "./types/tests"
   ]
