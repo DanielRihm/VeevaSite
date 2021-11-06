@@ -1,0 +1,23 @@
+
+.chart{
+    background-color:white;
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    
+    
+}
+h1{
+    text-align: center;
+    background-color: rgb(153, 250, 153);
+    border: 2px solid black;
+    display:center;
+    
+    
+    
+}
+body{
+    background: linear-gradient(to bottom, #33ccff 0%, white 100%) fixed;
+}
