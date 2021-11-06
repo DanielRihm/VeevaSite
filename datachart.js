@@ -27,26 +27,26 @@ $(function () {
         console.table(yNewData);
         console.table(yTotalData);
 
-        var trace1 = [{
+        var trace1 = {
             x: xData,
             y: yNewData,
             mode: 'lines+markers',
             type: 'scatter'
-        }];
+        };
 
-        var trace2 = [{
+        var trace2 = {
             x: xData,
             y: yTotalData,
             mode: 'lines+markers',
             type: 'scatter'
-        }];
+        };
 
         var data = [trace1, trace2];
 
         var layout = {font: {size: 18}};
         var config = {responsive: true};
         TESTER = document.getElementById('test');
-        Plotly.newPlot(TESTER, trace1, layout, config);
+        Plotly.newPlot(TESTER, data, layout, config);
         });
 });
 
