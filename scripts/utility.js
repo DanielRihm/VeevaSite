@@ -14,7 +14,7 @@ function parseCSV(str) {
 // sums up all of the integer values in the columns specified by index
 function sumOfColumn(input, index) {
     var sum = 0;
-    for (let i = 0; i < input[index].length; i++) {
+    for (let i = 0; i < input.length; i++) {
         sum += parseInt(input[i][index]);
     }
 
@@ -33,10 +33,7 @@ function findMaxPresciption(doctor, productData) {
     const endIndex = 16;
 
     // finds the doctors total prescription count
-    var totalPrescription = 0;
-    for (var i = startIndex; i < endIndex; i++) {
-        totalPrescription += parseInt(doctor[i]);
-    }
+    var totalPrescription = rowSum(doctor, startIndex, endIndex);
 
     var productIndex = findProduct(productData, doctor[4]);
     if (productIndex != -1) {
@@ -53,6 +50,72 @@ function findMaxPresciption(doctor, productData) {
     }
 }
 
+/*
+ * Takes in an array of the top future doctors for a particular prescription
+ * and the object for a new doctor and updates the array if the object is 
+ * a new top future doctor for that product
+ */
+function findFutureTopDoctor(topDocs, newDoc) {
+    var productIndex = findProduct(topDocs, newDoc.product);
+    if (productIndex != -1) {
+        if (newDoc.futureTotal > topDocs[productIndex].futureTotal) {
+            topDocs[productIndex] = newDoc;
+        }
+    } else {
+        topDocs.push(newDoc);
+    }
+}
+
+/* takes in two arrays, one for the doctor data and one for storing the doctors in;
+ * reads in the doctors new prescription data and predicts their future prescriptions
+ * 
+ * save the predictions to the given array of objects
+ */
+function predictDoctor(doctor) {
+    // set this value equal to the number of months ahead you wish to predict
+    const futureTime = 6;
+
+    const startIndex = 5;
+    const endIndex = 10;
+    const dataPointCount = endIndex - startIndex + 1;
+    const xValues = [1,2,3,4,5,6];
+
+    var yValues = [];
+    for (var i = startIndex; i <= endIndex; i++) {
+        yValues.push(parseInt(doctor[i]));
+    }
+
+    var sumX = 0;
+    var sumY = 0;
+    var sumXTY = 0;
+    var sumXX = 0;
+    for (var i = 0; i < xValues.length; i++) {
+        sumX += xValues[i];
+        sumY += yValues[i];
+        sumXTY += xValues[i] * yValues[i];
+        sumXX += xValues[i] * xValues[i];
+    }
+
+    var slope = (dataPointCount * sumXTY - sumX * sumY) / (dataPointCount * sumXX - sumX * sumX);
+    var offset = (sumY - slope * sumX) / dataPointCount;
+
+    var futureValue = Math.round(slope * futureTime + offset);
+
+    // find the total prescription for that doctor
+    var totalPrescription = rowSum(doctor, 11, 16);
+    
+    // add the doctor to the futureDoctors array
+    var futureDoc = {
+        name:doctor[1] + " " + doctor[2],
+        product:doctor[4],
+        futureNRx:futureValue,
+        currentTRx:totalPrescription,
+        futureTotal:futureValue + totalPrescription
+    };
+
+    return futureDoc;
+}
+
 // finds if the given array contains the given product and returns the index of the product
 // returns -1 if no product was found
 function findProduct(array, product) {
@@ -66,4 +129,38 @@ function findProduct(array, product) {
     }
 
     return productIndex;
+}
+
+// finds the sum of the values between startIndex and endIndex
+function rowSum(array, startIndex, endIndex) {
+    var sum = 0;
+    for (var i = startIndex; i < endIndex; i++) {
+        sum += parseInt(array[i]);
+    }
+
+    return sum;
+}
+
+// takes an array for a product for a single doctor and adds that doctor's
+// totals to the total sum for that product
+function sumTRxPerMonth(doctor, sumTRx){
+    var productIndex = findProduct(sumTRx, doctor[4]);
+    if (productIndex != -1) {
+        sumTRx[productIndex].countMonth1 += parseInt(doctor[11]);
+        sumTRx[productIndex].countMonth2 += parseInt(doctor[12]);
+        sumTRx[productIndex].countMonth3 += parseInt(doctor[13]);
+        sumTRx[productIndex].countMonth4 += parseInt(doctor[14]);
+        sumTRx[productIndex].countMonth5 += parseInt(doctor[15]);
+        sumTRx[productIndex].countMonth6 += parseInt(doctor[16]);
+    } else {
+        sumTRx.push({
+            product:doctor[4],
+            countMonth1:parseInt(doctor[11]),
+            countMonth2:parseInt(doctor[12]),
+            countMonth3:parseInt(doctor[13]),
+            countMonth4:parseInt(doctor[14]),
+            countMonth5:parseInt(doctor[15]),
+            countMonth6:parseInt(doctor[16])
+        });
+    }
 }

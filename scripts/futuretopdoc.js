@@ -6,26 +6,27 @@ $(function () {
         // create table of all of the data seperated out
         var columnData = parseCSV(input);
 
-        // declare maximum object array for the products
-        var maxProduct = [];
+        // create array of doctor prescription predictions
+        var docPredict = [];
 
-        // find the max products
+        // populate array with data
         for (var i = 0; i < columnData.length; i++) {
-            findMaxPresciption(columnData[i],maxProduct);
+            var futureDoc = predictDoctor(columnData[i]);
+            findFutureTopDoctor(docPredict, futureDoc);
         }
 
         //define data array
         var tabledata = [];
-        for (var i = 0; i < maxProduct.length; i++) {
+        for (var i = 0; i < docPredict.length; i++) {
             tabledata[i] = {
                 id:i+1,
-                product:maxProduct[i].product,
-                count:maxProduct[i].count,
-                name:maxProduct[i].name
+                name:docPredict[i].name,
+                count:docPredict[i].futureTotal,
+                product:docPredict[i].product
             };
         }
 
-        var table = new Tabulator("#TopDocTable", {
+        var table = new Tabulator("#FutureTopDocTable", {
             data:tabledata,           //load row data from array
             layout:"fitColumns",      //fit columns to width of table
             responsiveLayout:"hide",  //hide columns that dont fit on the table
@@ -40,7 +41,7 @@ $(function () {
             ],
             columns:[                 //define the table columns
                 {title:"Doctor", field:"name", editor:"input"},
-                {title:"Total Prescribed", field:"count", editor:"input"},
+                {title:"Predicted Total Prescriptions", field:"count", editor:"input"},
                 {title:"Product", field:"product", editor:"input"}
             ],
         });
