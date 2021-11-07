@@ -39,9 +39,9 @@ $(function () {
                 {column:"name", dir:"asc"},
             ],
             columns:[                 //define the table columns
-                {title:"Product", field:"product", editor:"input"},
+                {title:"Doctor", field:"name", editor:"input"},
                 {title:"Total Prescribed", field:"count", editor:"input"},
-                {title:"Doctor", field:"name", editor:"input"}
+                {title:"Product", field:"product", editor:"input"}
             ],
         });
     });

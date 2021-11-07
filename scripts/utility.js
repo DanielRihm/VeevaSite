@@ -50,12 +50,28 @@ function findMaxPresciption(doctor, productData) {
     }
 }
 
+/*
+ * Takes in an array of the top future doctors for a particular prescription
+ * and the object for a new doctor and updates the array if the object is 
+ * a new top future doctor for that product
+ */
+function findFutureTopDoctor(topDocs, newDoc) {
+    var productIndex = findProduct(topDocs, newDoc.product);
+    if (productIndex != -1) {
+        if (newDoc.futureTotal > topDocs[productIndex].futureTotal) {
+            topDocs[productIndex] = newDoc;
+        }
+    } else {
+        topDocs.push(newDoc);
+    }
+}
+
 /* takes in two arrays, one for the doctor data and one for storing the doctors in;
  * reads in the doctors new prescription data and predicts their future prescriptions
  * 
  * save the predictions to the given array of objects
  */
-function predictDoctor(doctor, futureDoctors) {
+function predictDoctor(doctor) {
     // set this value equal to the number of months ahead you wish to predict
     const futureTime = 6;
 
@@ -83,17 +99,21 @@ function predictDoctor(doctor, futureDoctors) {
     var slope = (dataPointCount * sumXTY - sumX * sumY) / (dataPointCount * sumXX - sumX * sumX);
     var offset = (sumY - slope * sumX) / dataPointCount;
 
-    var futureValue = slope * futureTime + offset;
+    var futureValue = Math.round(slope * futureTime + offset);
 
     // find the total prescription for that doctor
     var totalPrescription = rowSum(doctor, 11, 16);
     
     // add the doctor to the futureDoctors array
-    futureDoctors.push({
+    var futureDoc = {
         name:doctor[1] + " " + doctor[2],
+        product:doctor[4],
         futureNRx:futureValue,
-        currentTRx:totalPrescription
-    });
+        currentTRx:totalPrescription,
+        futureTotal:futureValue + totalPrescription
+    };
+
+    return futureDoc;
 }
 
 // finds if the given array contains the given product and returns the index of the product
