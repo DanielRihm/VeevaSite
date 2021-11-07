@@ -126,3 +126,9 @@ input{
     margin-top: 1rem;
     
 }
+pre{
+    display: block;
+    margin: auto;
+    position: relative;
+    left: 43%
+}
