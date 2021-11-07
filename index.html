@@ -3,7 +3,9 @@
     <header>
         <div class="container">
             <section class ="title">
+                <a href="https://www.veeva.com">
                 <img src="https://www.veeva.com/wp-content/themes/veeva2015/assets/img/placeholders/veeva-logo.png">
+                </a>
             </section>
             <nav>
                 <ul>
@@ -17,15 +19,19 @@
         </div>
     </header>    
     <head>
-        <title>Veeva</title>
+        <title>Home</title>
         <link rel ="stylesheet" href ="style.css">
     </head>
     <body>
         <h1>Veeva Data Upload Center</h1>
         <p>Please enter data below:</p>
-        <pre id="output"></pre>
-        <input type="file" onchange="loadFile(this.files[0])">
-        <br>
-        <script src="scripts/main.js"></script>
+        <!--Input file-->
+            <pre id="output"></pre>
+            <input type="file" onchange="loadFile(this.files[0])">
+            <br>
+            <section class="in">
+                    <script src="scripts/main.js"></script>
+            </section>
+        <p>Once uploaded, navigate to the top to see different data presentations.</p>
     </body>
 </html>
