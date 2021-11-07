@@ -4,7 +4,11 @@ $(function () {
         var input = data.split('\r\n');
         var columnData = parseCSV(input);
 
-        var sumTRx = sumTRxPerMonth(columnData);
+        var sumTRx = [];
+
+        for (var i = 0; i < columnData.length; i++) {
+            sumTRxPerMonth(columnData[i],sumTRx);
+        }
 
         const xData = [1,2,3,4,5,6];
         var data = [];
@@ -30,7 +34,7 @@ $(function () {
         // makes the plot
         var layout = {font: {size: 18}};
         var config = {responsive: true};
-        TESTER = document.getElementById('test');
+        TESTER = document.getElementById('ProductTrends');
         Plotly.newPlot(TESTER, data, layout, config);
     })
 });
