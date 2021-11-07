@@ -1,7 +1,7 @@
 var data = sessionStorage.getItem("csvInput");
 
 //Array
-var input = data.split('\r\n');
+var input = data.split('\n');
 var columnData = parseCSV(input);
 
 var sumTRx = [];
