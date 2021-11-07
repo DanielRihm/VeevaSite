@@ -89,3 +89,11 @@ nav a:hover::before{
     float: left;
     font-size: 35px;
 }
+p{
+    text-align: center;
+    font-size: 35px;
+    color: white;
+}
+button{
+   
+}
