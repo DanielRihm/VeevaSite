@@ -19,11 +19,11 @@ $(function () {
         
         // finds the y data for each x coordinate
         for (var i = newStart; i <= newEnd; i++) {
-            yNewData[i-newStart] = sumOfColumn(columnData, i);
+            yNewData.push(sumOfColumn(columnData, i));
         }
 
         for (var i = totalStart; i <= totalEnd; i++) {
-            yTotalData[i-totalStart] = sumOfColumn(columnData, i);
+            yTotalData.push(sumOfColumn(columnData, i));
         }
 
         // creates the line traces

@@ -14,7 +14,7 @@ function parseCSV(str) {
 // sums up all of the integer values in the columns specified by index
 function sumOfColumn(input, index) {
     var sum = 0;
-    for (let i = 0; i < input[index].length; i++) {
+    for (let i = 0; i < input.length; i++) {
         sum += parseInt(input[i][index]);
     }
 
@@ -144,6 +144,7 @@ function rowSum(array, startIndex, endIndex) {
 // takes an array for a product for a single doctor and adds that doctor's
 // totals to the total sum for that product
 function sumTRxPerMonth(doctor, sumTRx){
+    console.table(doctor);
     var productIndex = findProduct(sumTRx, doctor[4]);
     if (productIndex != -1) {
         sumTRx[productIndex].countMonth1 += parseInt(doctor[11]);
