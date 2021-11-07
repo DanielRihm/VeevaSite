@@ -140,3 +140,31 @@ function rowSum(array, startIndex, endIndex) {
 
     return sum;
 }
+
+// {product:"product", countMonth1:134}
+function sumTRxPerMonth(array){
+    var sumTRx = [];
+    for (let i = 0; i < array.length; i++) {
+        var productIndex = findProduct(sumTRx, array[i][4]);
+        if (productIndex != -1) {
+            sumTRx[productIndex].countMonth1 += parseInt(array[i][11]);
+            sumTRx[productIndex].countMonth2 += parseInt(array[i][12]);
+            sumTRx[productIndex].countMonth3 += parseInt(array[i][13]);
+            sumTRx[productIndex].countMonth4 += parseInt(array[i][14]);
+            sumTRx[productIndex].countMonth5 += parseInt(array[i][15]);
+            sumTRx[productIndex].countMonth6 += parseInt(array[i][16]);
+        } else {
+            sumTRx.push({
+                product:array[i][4],
+                countMonth1:parseInt(array[i][11]),
+                countMonth2:parseInt(array[i][12]),
+                countMonth3:parseInt(array[i][13]),
+                countMonth4:parseInt(array[i][14]),
+                countMonth5:parseInt(array[i][15]),
+                countMonth6:parseInt(array[i][16])
+            });
+        }
+    }
+
+    return sumTRx;
+}
