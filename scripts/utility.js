@@ -33,10 +33,7 @@ function findMaxPresciption(doctor, productData) {
     const endIndex = 16;
 
     // finds the doctors total prescription count
-    var totalPrescription = 0;
-    for (var i = startIndex; i < endIndex; i++) {
-        totalPrescription += parseInt(doctor[i]);
-    }
+    var totalPrescription = rowSum(doctor, startIndex, endIndex);
 
     var productIndex = findProduct(productData, doctor[4]);
     if (productIndex != -1) {
@@ -53,6 +50,52 @@ function findMaxPresciption(doctor, productData) {
     }
 }
 
+/* takes in two arrays, one for the doctor data and one for storing the doctors in;
+ * reads in the doctors new prescription data and predicts their future prescriptions
+ * 
+ * save the predictions to the given array of objects
+ */
+function predictDoctor(doctor, futureDoctors) {
+    // set this value equal to the number of months ahead you wish to predict
+    const futureTime = 6;
+
+    const startIndex = 5;
+    const endIndex = 10;
+    const dataPointCount = endIndex - startIndex + 1;
+    const xValues = [1,2,3,4,5,6];
+
+    var yValues = [];
+    for (var i = startIndex; i <= endIndex; i++) {
+        yValues.push(parseInt(doctor[i]));
+    }
+
+    var sumX = 0;
+    var sumY = 0;
+    var sumXTY = 0;
+    var sumXX = 0;
+    for (var i = 0; i < xValues.length; i++) {
+        sumX += xValues[i];
+        sumY += yValues[i];
+        sumXTY += xValues[i] * yValues[i];
+        sumXX += xValues[i] * xValues[i];
+    }
+
+    var slope = (dataPointCount * sumXTY - sumX * sumY) / (dataPointCount * sumXX - sumX * sumX);
+    var offset = (sumY - slope * sumX) / dataPointCount;
+
+    var futureValue = slope * futureTime + offset;
+
+    // find the total prescription for that doctor
+    var totalPrescription = rowSum(doctor, 11, 16);
+    
+    // add the doctor to the futureDoctors array
+    futureDoctors.push({
+        name:doctor[1] + " " + doctor[2],
+        futureNRx:futureValue,
+        currentTRx:totalPrescription
+    });
+}
+
 // finds if the given array contains the given product and returns the index of the product
 // returns -1 if no product was found
 function findProduct(array, product) {
@@ -66,4 +109,14 @@ function findProduct(array, product) {
     }
 
     return productIndex;
+}
+
+// finds the sum of the values between startIndex and endIndex
+function rowSum(array, startIndex, endIndex) {
+    var sum = 0;
+    for (var i = startIndex; i < endIndex; i++) {
+        sum += parseInt(array[i]);
+    }
+
+    return sum;
 }
