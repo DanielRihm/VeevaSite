@@ -2,18 +2,27 @@ var data = sessionStorage.getItem("csvInput");
 var input = data.split("\n");
 var columnData = parseCSV(input);
 
-var width = 960, height = 1160;
+var width = 1200, height = 600;
 
 var svg = d3.select("#map").append("svg").attr("width", width).attr("height", height);
 
 var projection = d3.geo.albersUsa()
-	.translate([width/2, height/2])    // translate to center of screen
-	.scale([1000]);          // scale things down so see entire US
+	//.translate([width/2, height/2])    // translate to center of screen
+	.scale([700]);          // scale things down so see entire US
 
 var path = d3.geo.path().projection(projection);
 
 var color = d3.scale.linear()
-	.range(["rgb(213,222,217)","rgb(111,189,185)","rgb(69,173,168)","rgb(41,148,142)","rgb(84,36,55)","rgb(217,91,67)","rgb(173,39,14)"]);
+    .domain([0, 1,2,3,4,5, 6])
+	.range([
+        "rgb(233,242,240)",
+        "rgb(158,232,216)",
+        "rgb(91,176,158)",
+        "rgb(38,135,115)",
+        "rgb(1,94,75)",
+        "rgb(0,41,43)",
+        "rgb(247,0,0)"
+    ]);
 
 var legendText = ["0-10k", "10k-20k", "20k-30k", "30k-40k","40k-50k","50k-60k","60k-70k"];
 
@@ -76,12 +85,12 @@ d3.json("states-10m.json", function(json) {
             }
     });
 
-    var legend = d3.select("body").append("svg")
+    var legend = d3.select("#map").append("svg")
       	.attr("class", "legend")
      	.attr("width", 140)
     	.attr("height", 200)
    		.selectAll("g")
-   		.data(color.domain().slice().reverse())
+   		.data(color.domain())//.slice().reverse())
    		.enter()
    		.append("g")
      	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });

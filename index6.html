@@ -20,6 +20,38 @@
     <head>
         <title>Example Page</title>
         <link rel ="stylesheet" href ="style.css">
+        <style type="text/css">
+            /* On mouse hover, lighten state color */
+            path:hover {
+        	    fill-opacity: .7;
+            }
+
+            /* Style for Custom Tooltip */
+            div.tooltip {   
+ 	            position: absolute;           
+	            text-align: center;           
+	            width: 60px;                  
+	            height: 28px;                 
+	            padding: 2px;             
+	            font: 12px sans-serif;        
+	            background: white;   
+	            border: 0px;      
+	            border-radius: 8px;           
+	            pointer-events: none;         
+            }
+
+            /* Legend font style */
+            body {
+                font: 11px sans-serif;
+            }
+        
+            /* Legend Position Style */
+            .legend {
+	            position:absolute;
+	            left:1050px;
+	            top:600px;
+            }
+        </style>
     </head>
     <body>
         <h1>Heatmap</h1>
