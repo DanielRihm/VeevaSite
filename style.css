@@ -130,5 +130,7 @@ pre{
     display: block;
     margin: auto;
     position: relative;
-    left: 43%
+    left: 43%;
+    font-family: Roboto;
+    color: white;
 }
