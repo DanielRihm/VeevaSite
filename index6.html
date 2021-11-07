@@ -18,21 +18,55 @@
         </div>
     </header>    
     <head>
-        <title>Future Top Perscribers</title>
+        <title>Example Page</title>
         <link rel ="stylesheet" href ="style.css">
+        <style type="text/css">
+            /* On mouse hover, lighten state color */
+            path:hover {
+        	    fill-opacity: .7;
+            }
+
+            /* Style for Custom Tooltip */
+            div.tooltip {   
+ 	            position: absolute;           
+	            text-align: center;           
+	            width: 60px;                  
+	            height: 28px;                 
+	            padding: 2px;             
+	            font: 12px sans-serif;        
+	            background: white;   
+	            border: 0px;      
+	            border-radius: 8px;           
+	            pointer-events: none;         
+            }
+
+            /* Legend font style */
+            body {
+                font: 11px sans-serif;
+            }
+        
+            /* Legend Position Style */
+            .legend {
+	            position:absolute;
+	            left:1050px;
+	            top:600px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Future Top Perscribers</h1>
-        <p></p>
+        <h1>Heatmap</h1>
+        <p>This is a map we made(CHANGE).</p>
         <!--Chart Section-->
         <section class = "chart">
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
             <script src="scripts/utility.js"></script>
             <link href="tabulator-master/dist/css/tabulator.min.css" rel="stylesheet">
             <script type="text/javascript" src="tabulator-master/dist/js/tabulator.min.js"></script>
+            <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script src="//d3js.org/topojson.v1.min.js"></script>
 
-            <div id="FutureTopDocTable"></div>
-            <script src="scripts/futuretopdoc.js"></script>
+            <div id="map"></div>
+            <script src="scripts/map.js"></script>
         </section>
         <!--End of Chart Section-->
     </body>

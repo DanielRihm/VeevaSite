@@ -21,6 +21,50 @@ function sumOfColumn(input, index) {
     return sum;
 }
 
+function parseStateColorData(stateData, range) {
+    for (var i = 0; i < stateData.length; i++) {
+        var rangeIndex = 1;
+        while (stateData[i].color == -1 && rangeIndex - 1 < range.length) {
+            if (stateData[i].TRx > range[rangeIndex-1] && stateData[i].TRx < range[rangeIndex]) {
+                stateData[i].color = rangeIndex - 1;
+            }
+            rangeIndex++;
+        }
+    }
+}
+
+// sets state color data to a default -1
+function addStateData(stateData, lineArray) {
+    const startIndex = 11;
+    const endIndex = 16;
+
+    var totalPrescription = rowSum(lineArray, startIndex, endIndex);
+
+    var stateIndex = findState(stateData, lineArray[3]);
+    if (stateIndex != -1) {
+        stateData[stateIndex].TRx += totalPrescription;
+    } else {
+        stateData.push({
+            state:lineArray[3],
+            TRx:totalPrescription,
+            color:-1
+        });
+    }
+}
+
+function findState(stateData, state) {
+    var stateIndex = -1;
+    var currentIndex = 0;
+    while (currentIndex < stateData.length && stateIndex == -1) {
+        if (stateData[currentIndex].state == state) {
+            stateIndex = currentIndex;
+        }
+        currentIndex++;
+    }
+
+    return stateIndex;
+}
+
 /* takes in two arrays, one for the doctor data and one for product data;
  * finds if the total prescribed medication for that doctor is greater than
  * the current product data and updates product data accordingly
