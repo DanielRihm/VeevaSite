@@ -144,7 +144,6 @@ function rowSum(array, startIndex, endIndex) {
 // takes an array for a product for a single doctor and adds that doctor's
 // totals to the total sum for that product
 function sumTRxPerMonth(doctor, sumTRx){
-    console.table(doctor);
     var productIndex = findProduct(sumTRx, doctor[4]);
     if (productIndex != -1) {
         sumTRx[productIndex].countMonth1 += parseInt(doctor[11]);
