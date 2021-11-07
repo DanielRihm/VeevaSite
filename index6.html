@@ -18,15 +18,22 @@
         </div>
     </header>    
     <head>
-        <title>Veeva</title>
+        <title>Example Page</title>
         <link rel ="stylesheet" href ="style.css">
     </head>
     <body>
-        <h1>Veeva Data Upload Center</h1>
-        <p>Please enter data below:</p>
-        <pre id="output"></pre>
-        <input type="file" onchange="loadFile(this.files[0])">
-        <br>
-        <script src="scripts/main.js"></script>
+        <h1>Heatmap</h1>
+        <p>This is a map we made(CHANGE).</p>
+        <!--Chart Section-->
+        <section class = "chart">
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <script src="scripts/utility.js"></script>
+            <link href="tabulator-master/dist/css/tabulator.min.css" rel="stylesheet">
+            <script type="text/javascript" src="tabulator-master/dist/js/tabulator.min.js"></script>
+
+            <div id="map"></div>
+            <script src="scripts/map.js"></script>
+        </section>
+        <!--End of Chart Section-->
     </body>
 </html>
