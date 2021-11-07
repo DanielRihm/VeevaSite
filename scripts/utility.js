@@ -145,6 +145,10 @@ function predictDoctor(doctor) {
 
     var futureValue = Math.round(slope * futureTime + offset);
 
+    if (futureValue < 0) {
+        futureValue = 0;
+    }
+
     // find the total prescription for that doctor
     var totalPrescription = rowSum(doctor, 11, 16);
     
