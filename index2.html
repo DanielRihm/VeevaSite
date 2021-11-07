@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <header>
+        <div class="container">
+            <section class ="title">
+                <img src="https://www.veeva.com/wp-content/themes/veeva2015/assets/img/placeholders/veeva-logo.png">
+            </section>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index2.html">Chart1</a></li>
+                    <li><a href="index3.html">Table1</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>    
+    <head>
+        <title>Chart1</title>
+        <link rel ="stylesheet" href ="style.css">
+    </head>
+    <body>
+        <h1>Chart1</h1>
+        <p>This is a chart we made(CHANGE).</p>
+        <!--Chart Section-->
+        <section class = "chart">
+            <script src="scripts/jquery.csv.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <script src="scripts/utility.js"></script>
+            <link href="tabulator-master/dist/css/tabulator.min.css" rel="stylesheet">
+            <script type="text/javascript" src="tabulator-master/dist/js/tabulator.min.js"></script>
+
+            <div id="TotalVSNew"></div>
+            <script src="scripts/datachart.js"></script>
+        </section>
+        <!--End of Chart Section-->
+    </body>
+</html>
