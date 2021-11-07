@@ -1,4 +1,4 @@
-var data = sessionStorage.getItem("csvItem");
+var data = sessionStorage.getItem("csvInput");
 
 //Array
 var input = data.split('\r\n');
